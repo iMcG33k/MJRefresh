@@ -11,14 +11,14 @@
 
 @implementation MJExampleWindow
 
-static UIWindow *window_;
+static UIWindow* window_;
 + (void)show
 {
     window_ = [[UIWindow alloc] init];
     CGFloat width = 150;
     CGFloat x = [UIScreen mainScreen].bounds.size.width - width - 10;
     window_.frame = CGRectMake(x, 0, width, 25);
-    window_.windowLevel = UIWindowLevelAlert;
+    window_.windowLevel = UIWindowLevelAlert; // 设置 window等级, 保证window在最前显示
     window_.hidden = NO;
     window_.alpha = 0.5;
     window_.rootViewController = [[MJTempViewController alloc] init];

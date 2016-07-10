@@ -6,6 +6,8 @@
 //  Copyright © 2015年 小码哥. All rights reserved.
 //
 
+// 所有的 Nav 1级 controller
+
 #import <UIKit/UIKit.h>
 
 @interface MJSingleViewController : UITableViewController
