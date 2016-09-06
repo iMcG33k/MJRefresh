@@ -11,7 +11,7 @@
 
 @implementation MJExampleWindow
 
-static UIWindow* window_;
+static UIWindow* window_; // 为什么是window_, 而不是_window? 应该是为了区别成员变量.
 + (void)show
 {
     window_ = [[UIWindow alloc] init];

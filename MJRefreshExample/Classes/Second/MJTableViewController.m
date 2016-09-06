@@ -369,6 +369,7 @@ static const CGFloat MJDuration = 2.0;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    //Mark: 将传进来的字符串转为SEL进行调用
     MJPerformSelectorLeakWarning(
         [self performSelector:NSSelectorFromString(self.method) withObject:nil];
                                  );

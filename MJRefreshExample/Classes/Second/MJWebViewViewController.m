@@ -6,44 +6,48 @@
 //  Copyright (c) 2015年 小码哥. All rights reserved.
 //
 
+#import "MJRefresh.h"
 #import "MJWebViewViewController.h"
 #import "UIViewController+Example.h"
-#import "MJRefresh.h"
 
 @interface MJWebViewViewController () <UIWebViewDelegate>
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UIWebView* webView;
 @end
 
 @implementation MJWebViewViewController
 #pragma mark - 示例
 - (void)example31
 {
-    __unsafe_unretained UIWebView *webView = self.webView;
+    //???: __unsafe_unretained
+    __unsafe_unretained UIWebView* webView = self.webView;
     webView.delegate = self;
-    
-    __unsafe_unretained UIScrollView *scrollView = self.webView.scrollView;
-    
+    //Mark: webView的下拉刷新加到webView.scrollView上
+    __unsafe_unretained UIScrollView* scrollView = self.webView.scrollView;
+
     // 添加下拉刷新控件
-    scrollView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 1.下拉只负责刷新webView
         [webView reload];
     }];
-    
+
     // 如果是上拉刷新，就以此类推
 }
 
 #pragma mark - webViewDelegate
-- (void)webViewDidFinishLoad:(nonnull UIWebView *)webView
+- (void)webViewDidFinishLoad:(nonnull UIWebView*)webView
 {
+    // 2. 网页加载完成后再停止刷新动画
     [self.webView.scrollView.mj_header endRefreshing];
 }
 
 #pragma mark - 其他
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
+
     // 加载页面
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://weibo.com/exceptions"]]];
-    
+//SWNotes: UIViewController(Example) 动态添加的属性
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     [self performSelector:NSSelectorFromString(self.method) withObject:nil];
@@ -53,16 +57,16 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
+
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
+
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
@@ -71,7 +75,8 @@
     return YES;
 }
 
-- (IBAction)back {
+- (IBAction)back
+{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
