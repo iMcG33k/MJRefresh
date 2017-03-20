@@ -18,12 +18,20 @@
 #pragma mark - 示例
 - (void)example31
 {
+<<<<<<< HEAD
     //???: __unsafe_unretained
     __unsafe_unretained UIWebView* webView = self.webView;
     webView.delegate = self;
     //Mark: webView的下拉刷新加到webView.scrollView上
     __unsafe_unretained UIScrollView* scrollView = self.webView.scrollView;
 
+=======
+    __weak UIWebView *webView = self.webView;
+    webView.delegate = self;
+    
+    __weak UIScrollView *scrollView = self.webView.scrollView;
+    
+>>>>>>> CoderMJLee/master
     // 添加下拉刷新控件
     scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         // 1.下拉只负责刷新webView
